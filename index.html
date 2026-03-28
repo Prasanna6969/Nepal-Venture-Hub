@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nepal Venture Hub — Build What Matters</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --ink: #0F0E0C;
+    --ink-muted: #6B6860;
+    --accent: #C0392B;
+    --accent2: #E67E22;
+    --accent-light: #FDF0EE;
+    --border: #E8E5DF;
+    --tag-bg: #F0EDE6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 900;
+    color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; color: var(--ink-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink); color: var(--bg) !important;
+    padding: 8px 20px; border-radius: 6px;
+  }
+  .nav-cta:hover { background: var(--accent); color: #fff !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(120px, 18vw, 260px);
+    font-weight: 900; color: rgba(15,14,12,0.04);
+    white-space: nowrap; pointer-events: none; user-select: none;
+    letter-spacing: -0.02em;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; letter-spacing: 0.15em;
+    color: var(--accent); text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 900; line-height: 1.05;
+    letter-spacing: -0.02em; max-width: 820px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--ink-muted); max-width: 520px;
+    margin-top: 24px; font-weight: 400; line-height: 1.7;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--bg);
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.2s;
+    border: 2px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; transition: all 0.2s;
+    border: 2px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 80px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .stat { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900; color: var(--ink);
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.8rem; color: var(--ink-muted); font-weight: 500; margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 54px);
+    font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+    max-width: 640px; margin-bottom: 16px;
+  }
+  .section-desc { color: var(--ink-muted); max-width: 540px; font-size: 1rem; line-height: 1.7; margin-bottom: 56px; }
+
+  /* SECTORS GRID */
+  #sectors { background: var(--surface); }
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px; background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .sector-card {
+    background: var(--surface);
+    padding: 32px;
+    transition: all 0.25s;
+    cursor: pointer; position: relative; overflow: hidden;
+  }
+  .sector-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .sector-card:hover { background: var(--accent-light); }
+  .sector-card:hover::after { transform: scaleX(1); }
+  .sector-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px;
+    display: inline-block; border: 1px solid rgba(192,57,43,0.25);
+    padding: 3px 9px; border-radius: 4px;
+  }
+  .sector-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;
+  }
+  .sector-tagline { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.5; margin-bottom: 16px; }
+  .sector-market {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; color: var(--accent);
+    background: var(--accent-light); padding: 4px 10px;
+    border-radius: 4px; display: inline-block;
+    border: 1px solid rgba(192,57,43,0.15);
+  }
+  .sector-problems {
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .problem-tag {
+    font-size: 0.72rem; color: var(--ink-muted);
+    background: var(--tag-bg); padding: 3px 10px;
+    border-radius: 100px; border: 1px solid var(--border);
+  }
+
+  /* PROBLEMS TABLE */
+  #problems { background: var(--bg); }
+  .problems-filter {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .filter-btn {
+    padding: 8px 18px; border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--surface); font-size: 0.82rem;
+    cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    color: var(--ink-muted); font-weight: 500;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  .problems-list { display: flex; flex-direction: column; gap: 2px; }
+  .problem-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px; align-items: center;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .problem-row:hover { border-color: var(--accent); transform: translateX(4px); }
+  .problem-row-left { display: flex; flex-direction: column; gap: 8px; }
+  .problem-sector-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500;
+  }
+  .problem-title { font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+  .problem-desc { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.6; max-width: 560px; }
+  .problem-meta { display: flex; gap: 16px; margin-top: 4px; flex-wrap: wrap; }
+  .problem-meta-item { font-size: 0.78rem; color: var(--ink-muted); display: flex; align-items: center; gap: 4px; }
+  .problem-row-right { text-align: right; }
+  .difficulty {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    padding: 4px 12px; border-radius: 100px; display: inline-block;
+    margin-bottom: 8px;
+  }
+  .diff-easy { background: #E8F5E9; color: #2E7D32; }
+  .diff-medium { background: #FFF3E0; color: #E65100; }
+  .diff-hard { background: #FCE4EC; color: #C62828; }
+  .market-size-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--accent); display: block;
+  }
+  .market-size-label { font-size: 0.72rem; color: var(--ink-muted); font-family: 'DM Mono', monospace; }
+
+  /* HOW TO START */
+  #how { background: var(--ink); color: var(--bg); }
+  #how .section-label { color: var(--accent2); }
+  #how .section-label::before { background: var(--accent2); }
+  #how .section-title { color: var(--bg); }
+  #how .section-desc { color: rgba(247,245,240,0.6); }
+  .steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 32px; }
+  .step-card {
+    padding: 32px; border: 1px solid rgba(247,245,240,0.1);
+    border-radius: 12px; position: relative;
+    transition: border-color 0.2s;
+  }
+  .step-card:hover { border-color: var(--accent2); }
+  .step-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: rgba(247,245,240,0.08); line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 10px; color: var(--bg); }
+  .step-desc { font-size: 0.875rem; color: rgba(247,245,240,0.55); line-height: 1.65; }
+  .step-icon { display: none; }
+
+  /* MARKET OVERVIEW */
+  #market { background: var(--bg); }
+  .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .market-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 36px; position: relative; overflow: hidden;
+  }
+  .market-card.featured {
+    background: var(--accent); color: #fff;
+    grid-column: 1 / -1;
+  }
+  .market-card.featured .market-card-label { color: rgba(255,255,255,0.7); }
+  .market-card.featured .market-card-desc { color: rgba(255,255,255,0.8); }
+  .market-card-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 12px;
+  }
+  .market-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900; line-height: 1; margin-bottom: 8px;
+  }
+  .market-card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+  .market-card-desc { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.65; }
+  .market-bars { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .bar-item { display: flex; flex-direction: column; gap: 6px; }
+  .bar-label { font-size: 0.8rem; color: var(--ink-muted); display: flex; justify-content: space-between; }
+  .bar-track { height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: 100px; transition: width 1.5s ease; }
+
+  /* COFOUNDERS */
+  #connect { background: var(--surface); }
+  .connect-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .founder-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 28px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .founder-card:hover { border-color: var(--ink); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+  .founder-avatar {
+    width: 44px; height: 44px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 900;
+    color: var(--ink); margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+  .founder-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .founder-role { font-size: 0.8rem; color: var(--accent); font-family: 'DM Mono', monospace; margin-bottom: 12px; }
+  .founder-bio { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.6; margin-bottom: 16px; }
+  .founder-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .founder-tag {
+    font-size: 0.72rem; padding: 3px 10px;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 100px; color: var(--ink-muted);
+  }
+  .founder-connect-btn {
+    margin-top: 16px; width: 100%;
+    padding: 10px; border-radius: 7px;
+    border: 1.5px solid var(--border);
+    background: transparent; font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; color: var(--ink);
+  }
+  .founder-connect-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* RESOURCES */
+  #resources { background: var(--bg); }
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .resource-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px; transition: all 0.2s;
+  }
+  .resource-card:hover { border-color: var(--accent); }
+  .resource-type {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 12px;
+  }
+  .resource-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .resource-desc { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.6; }
+  .resource-link {
+    margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.82rem; font-weight: 600; color: var(--accent);
+    text-decoration: none;
+  }
+  .resource-link:hover { text-decoration: underline; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--ink); padding: 100px 48px;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px); font-weight: 900;
+    color: var(--bg); letter-spacing: -0.02em; line-height: 1.1;
+    max-width: 700px; margin: 0 auto 20px;
+  }
+  .cta-section h2 em { color: var(--accent2); font-style: italic; }
+  .cta-section p { color: rgba(247,245,240,0.55); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-accent {
+    background: var(--accent); color: #fff;
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 2px solid var(--accent);
+    transition: all 0.2s;
+  }
+  .btn-accent:hover { background: #a93226; border-color: #a93226; }
+  .btn-ghost {
+    background: transparent; color: var(--bg);
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 2px solid rgba(247,245,240,0.2);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--bg); }
+
+  /* FOOTER */
+  footer {
+    background: #080807; color: rgba(247,245,240,0.4);
+    padding: 40px 48px; font-size: 0.82rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  footer .logo {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    color: var(--bg); font-size: 1rem;
+  }
+  footer .logo span { color: var(--accent); }
+  footer a { color: rgba(247,245,240,0.4); text-decoration: none; }
+  footer a:hover { color: var(--bg); }
+  footer nav { display: flex; gap: 24px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px; background: var(--border);
+    margin: 0 48px;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section, .hero, .cta-section { padding-left: 20px; padding-right: 20px; }
+    .divider { margin: 0 20px; }
+    .market-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Nepal<span>Venture</span></a>
+  <ul class="nav-links">
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#problems">Problems</a></li>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#connect">Co-founders</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#connect" class="nav-cta">Join Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">नेपाल</div>
+  <div class="hero-eyebrow">Nepal's Startup Ecosystem</div>
+  <h1>Build the <em>future</em><br>of Nepal, today.</h1>
+  <p class="hero-sub">Discover real unsolved problems across 12+ sectors, explore market opportunities worth billions, and connect with co-founders who share your vision.</p>
+  <div class="hero-actions">
+    <a href="#problems" class="btn-primary">Explore Problems →</a>
+    <a href="#sectors" class="btn-outline">Browse Sectors</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">12<span>+</span></span>
+      <span class="stat-label">Sectors Mapped</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$4.8<span>B</span></span>
+      <span class="stat-label">Addressable Market</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">30<span>M+</span></span>
+      <span class="stat-label">People to Serve</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">340<span>+</span></span>
+      <span class="stat-label">Open Problems</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="section-label">Sectors</div>
+  <div class="section-title">Where the opportunity lives</div>
+  <p class="section-desc">Nepal's economy is ripe for disruption. Every sector below has massive unsolved problems and underserved populations. Pick one and start building.</p>
+
+  <div class="sectors-grid reveal">
+    <div class="sector-card">
+      <div class="sector-icon">Agri</div>
+      <div class="sector-name">Agriculture & Food</div>
+      <div class="sector-tagline">66% of Nepal's workforce is in farming. Post-harvest losses reach 30%. Supply chains are broken, and farmers rarely get fair prices.</div>
+      <span class="sector-market">Market: ~$850M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Cold chain logistics</span>
+        <span class="problem-tag">Price discovery</span>
+        <span class="problem-tag">AgriFintech</span>
+        <span class="problem-tag">Crop insurance</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Tour</div>
+      <div class="sector-name">Tourism & Travel</div>
+      <div class="sector-tagline">Nepal attracts 1M+ tourists/year, yet most revenue leaks out. Local experiences are undiscovered, and booking systems are primitive.</div>
+      <span class="sector-market">Market: ~$700M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Local experience booking</span>
+        <span class="problem-tag">Guide platforms</span>
+        <span class="problem-tag">Trek safety tech</span>
+        <span class="problem-tag">Visa automation</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Fin</div>
+      <div class="sector-name">Fintech & Payments</div>
+      <div class="sector-tagline">Only 45% of Nepalis have bank accounts. Remittances ($8B/year) come at 5–7% fees. Credit is inaccessible for SMEs and farmers.</div>
+      <span class="sector-market">Market: ~$620M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Mobile wallets</span>
+        <span class="problem-tag">Remittance corridors</span>
+        <span class="problem-tag">SME lending</span>
+        <span class="problem-tag">Credit scoring</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Edu</div>
+      <div class="sector-name">Education & Skilling</div>
+      <div class="sector-tagline">Skills gap is massive. 400,000 youth enter the job market yearly with outdated skills. Quality tutoring is only in Kathmandu.</div>
+      <span class="sector-market">Market: ~$480M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Online tutoring</span>
+        <span class="problem-tag">Vocational training</span>
+        <span class="problem-tag">Skill certificates</span>
+        <span class="problem-tag">Rural access</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Med</div>
+      <div class="sector-name">Healthcare</div>
+      <div class="sector-tagline">Only 1 doctor per 1,700 patients. Rural health access is near zero. Telemedicine, diagnostics, and supply chains are missing.</div>
+      <span class="sector-market">Market: ~$390M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Telemedicine</span>
+        <span class="problem-tag">EHR systems</span>
+        <span class="problem-tag">Medicine delivery</span>
+        <span class="problem-tag">Health insurance</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Nrg</div>
+      <div class="sector-name">Energy & CleanTech</div>
+      <div class="sector-tagline">Nepal has 83,000 MW hydropower potential but only uses 2%. 40% of households still lack reliable electricity. Solar is barely tapped.</div>
+      <span class="sector-market">Market: ~$560M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Mini-grid solutions</span>
+        <span class="problem-tag">Energy storage</span>
+        <span class="problem-tag">Pay-as-you-go solar</span>
+        <span class="problem-tag">Grid monitoring</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Log</div>
+      <div class="sector-name">Logistics & Supply Chain</div>
+      <div class="sector-tagline">Landlocked geography creates massive inefficiencies. Last-mile delivery in hills and mountains remains completely unsolved.</div>
+      <span class="sector-market">Market: ~$320M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Last-mile delivery</span>
+        <span class="problem-tag">Warehouse management</span>
+        <span class="problem-tag">Cross-border trade</span>
+        <span class="problem-tag">Fleet tracking</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Prop</div>
+      <div class="sector-name">Real Estate & PropTech</div>
+      <div class="sector-tagline">No transparent property marketplace. Land records are fragmented. Rental and mortgage discovery is word-of-mouth at best.</div>
+      <span class="sector-market">Market: ~$280M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Property listings</span>
+        <span class="problem-tag">Land record digitization</span>
+        <span class="problem-tag">Rental platforms</span>
+        <span class="problem-tag">Home loans</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Com</div>
+      <div class="sector-name">E-Commerce & Retail</div>
+      <div class="sector-tagline">Nepal's e-commerce is $140M but growing 25%/year. Returns, trust, and payment friction are rampant. Local artisans have no channel.</div>
+      <span class="sector-market">Market: ~$420M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Artisan marketplace</span>
+        <span class="problem-tag">D2C brands</span>
+        <span class="problem-tag">Payment trust</span>
+        <span class="problem-tag">Returns management</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Bld</div>
+      <div class="sector-name">Construction & Infrastructure</div>
+      <div class="sector-tagline">Post-earthquake reconstruction still ongoing. 2025 earthquake recovery creates $2B+ in activity. No modern project management tools used.</div>
+      <span class="sector-market">Market: ~$900M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Project management SaaS</span>
+        <span class="problem-tag">Materials marketplace</span>
+        <span class="problem-tag">Earthquake-safe design</span>
+        <span class="problem-tag">Labor platforms</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">HR</div>
+      <div class="sector-name">HR & Future of Work</div>
+      <div class="sector-tagline">500,000+ Nepalis work abroad. Hiring abroad is exploitative. Nepal-based remote work is emerging but needs platforms and contracts.</div>
+      <span class="sector-market">Market: ~$210M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Ethical recruitment</span>
+        <span class="problem-tag">Remote work tools</span>
+        <span class="problem-tag">Payroll & compliance</span>
+        <span class="problem-tag">Worker rights tech</span>
+      </div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">Env</div>
+      <div class="sector-name">Environment & Waste</div>
+      <div class="sector-tagline">Kathmandu generates 1,000 tons of waste daily with no systematic management. Air quality is among Asia's worst. Climate risk is acute.</div>
+      <span class="sector-market">Market: ~$180M</span>
+      <div class="sector-problems">
+        <span class="problem-tag">Waste collection apps</span>
+        <span class="problem-tag">Recycling systems</span>
+        <span class="problem-tag">Air quality monitoring</span>
+        <span class="problem-tag">Carbon credits</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-label">Problem Board</div>
+  <div class="section-title">340+ real problems.<br>Pick yours.</div>
+  <p class="section-desc">Each problem is a startup waiting to happen. Browse by sector, difficulty, and market size.</p>
+
+  <div class="problems-filter">
+    <button class="filter-btn active" onclick="filterProblems('all', this)">All Sectors</button>
+    <button class="filter-btn" onclick="filterProblems('agri', this)">Agriculture</button>
+    <button class="filter-btn" onclick="filterProblems('fintech', this)">Fintech</button>
+    <button class="filter-btn" onclick="filterProblems('health', this)">Healthcare</button>
+    <button class="filter-btn" onclick="filterProblems('edu', this)">Education</button>
+    <button class="filter-btn" onclick="filterProblems('energy', this)">Energy</button>
+    <button class="filter-btn" onclick="filterProblems('logistics', this)">Logistics</button>
+    <button class="filter-btn" onclick="filterProblems('tourism', this)">Tourism</button>
+  </div>
+
+  <div class="problems-list" id="problemsList"></div>
+</section>
+
+<!-- HOW TO START -->
+<section id="how">
+  <div class="section-label">Start Your Startup</div>
+  <div class="section-title">From idea to launch in Nepal</div>
+  <p class="section-desc">Nepal's startup ecosystem is young but growing fast. Here's how to go from problem to product — legally, financially, and strategically.</p>
+
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-number">01</div>
+      <div class="step-title">Validate the Problem</div>
+      <div class="step-desc">Talk to at least 50 potential users before writing code. Use Problem Board above. Go to rural areas — that's where the real problems live. Document every interview.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">02</div>
+      <div class="step-title">Register Your Company</div>
+      <div class="step-desc">Register as a Private Limited Company at the Company Registrar's Office, Tripureshwor. Cost: NPR 5,000–20,000. Takes 3–7 days. You'll need PAN/VAT registration too.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">03</div>
+      <div class="step-title">Build an MVP</div>
+      <div class="step-desc">Keep it simple. Build for feature phones first — 60% of Nepal still isn't on smartphone. Test in one district before scaling. Purwanchal and Madhesh are great early markets.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">04</div>
+      <div class="step-title">Access Funding</div>
+      <div class="step-desc">Apply to SEBON for private equity rules. Reach out to Business Oxygen (BO2), True North Associates, or Dolma Impact Fund. Government's FNCCI and NRB both have SME loan schemes.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">05</div>
+      <div class="step-title">Understand Regulations</div>
+      <div class="step-desc">Fintech needs NRB license. Healthcare apps need Dept. of Health approval. Foreign investment follows FITTA 2019. Data laws are still evolving — stay updated via MOICS.</div>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-number">06</div>
+      <div class="step-title">Scale Beyond Nepal</div>
+      <div class="step-desc">Nepal is a testbed for South Asia. What works here often works in Bangladesh, Myanmar, Bhutan. Target diaspora (4M+ abroad) early. Flipside: position Nepal as low-CAC pilot market for global investors.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-label">Market Intelligence</div>
+  <div class="section-title">The numbers behind the opportunity</div>
+  <p class="section-desc">Nepal's digital economy is at an inflection point. Here's why now is the moment.</p>
+
+  <div class="market-grid reveal">
+    <div class="market-card featured">
+      <div class="market-card-label">Total Addressable Market</div>
+      <div class="market-card-num">$4.8 Billion</div>
+      <div class="market-card-title">Nepal's Combined Digital Opportunity Across All Sectors</div>
+      <div class="market-card-desc">Growing at 18% CAGR. Internet penetration reached 76% in 2024. Mobile money transactions hit $2.3B. The consumer class is expanding fast, and incumbents are asleep.</div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-label">Remittance Economy</div>
+      <div class="market-card-num">$8.2B</div>
+      <div class="market-card-title">Annual Remittances Into Nepal</div>
+      <div class="market-card-desc">26% of GDP. 4 million Nepalis abroad send money home — at 5–7% fees. A fintech reducing this to 1% could save families $400M/year and still build a $100M business.</div>
+      <div class="market-bars">
+        <div class="bar-item">
+          <div class="bar-label"><span>India corridor</span><span>38%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:38%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Gulf states</span><span>31%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:31%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Malaysia/Korea</span><span>18%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:18%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-label">Internet Users</div>
+      <div class="market-card-num">23M+</div>
+      <div class="market-card-title">Active Internet Users, 76% Penetration</div>
+      <div class="market-card-desc">From 1.7M in 2012 to 23M+ today. Growth is accelerating. 85% of new users are mobile-first. A massive, young, connected population ready for digital services.</div>
+      <div class="market-bars">
+        <div class="bar-item">
+          <div class="bar-label"><span>Urban users</span><span>92%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Rural users</span><span>58%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:58%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-label">Youth Bulge</div>
+      <div class="market-card-num">63%</div>
+      <div class="market-card-title">Population Under 35 Years Old</div>
+      <div class="market-card-desc">Nepal has one of South Asia's youngest populations. 400,000+ youth enter the job market each year. They're educated, tech-savvy, and frustrated with the status quo — a perfect early adopter base.</div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-label">VC & Impact Funding</div>
+      <div class="market-card-num">$120M+</div>
+      <div class="market-card-title">Impact Capital Available for Nepal Startups</div>
+      <div class="market-card-desc">Dolma Impact Fund, BO2, ADB, IFC, and global impact investors are actively looking for deal flow in Nepal. Most startups don't know how to find or pitch to them — the gap is on the founder side.</div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-label">GDP Growth</div>
+      <div class="market-card-num">5.8%</div>
+      <div class="market-card-title">Projected GDP Growth Rate 2025–2030</div>
+      <div class="market-card-desc">Post-pandemic recovery, infrastructure investment, and tourism rebound are driving growth. Sandwiched between India ($3.7T) and China ($19T), Nepal's location is a strategic asset, not a liability.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COFOUNDERS -->
+<section id="connect">
+  <div class="section-label">Co-founder Network</div>
+  <div class="section-title">Find your founding team</div>
+  <p class="section-desc">The best startups are built by complementary teams. Browse founders looking for co-founders across Nepal's ecosystem.</p>
+
+  <div class="connect-grid reveal">
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#FEF3C7">AS</div>
+      <div class="founder-name">Aarav Shrestha</div>
+      <div class="founder-role">Technical Co-founder</div>
+      <div class="founder-bio">Full-stack engineer, 5 years exp. Built payment integrations at Daraz. Looking for product/business co-founder for AgriTech idea in Terai.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">React</span>
+        <span class="founder-tag">Node.js</span>
+        <span class="founder-tag">AgriTech</span>
+        <span class="founder-tag">Kathmandu</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#E0F2FE">PR</div>
+      <div class="founder-name">Priya Rai</div>
+      <div class="founder-role">Domain Expert — Healthcare</div>
+      <div class="founder-bio">MBBS doctor, rural health experience in Karnali. Wants to build telemedicine for remote districts. Needs tech co-founder and business strategist.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">Healthcare</span>
+        <span class="founder-tag">Telemedicine</span>
+        <span class="founder-tag">Rural</span>
+        <span class="founder-tag">Nepalgunj</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#DCFCE7">BG</div>
+      <div class="founder-name">Bikash Gurung</div>
+      <div class="founder-role">Business & Growth</div>
+      <div class="founder-bio">Ex-NMB Bank, MBA from Tribhuvan. Obsessed with fixing remittance inefficiencies. Looking for fintech-experienced technical co-founder.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">Fintech</span>
+        <span class="founder-tag">Banking</span>
+        <span class="founder-tag">Growth</span>
+        <span class="founder-tag">Kathmandu</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#F3E8FF">ST</div>
+      <div class="founder-name">Sita Tamang</div>
+      <div class="founder-role">EdTech Founder</div>
+      <div class="founder-bio">Former teacher, built offline learning content for rural schools. Wants to scale via mobile app. Needs developer + investor intro help.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">EdTech</span>
+        <span class="founder-tag">Rural</span>
+        <span class="founder-tag">Content</span>
+        <span class="founder-tag">Pokhara</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#FEE2E2">RT</div>
+      <div class="founder-name">Rohan Thapa</div>
+      <div class="founder-role">CleanTech Engineer</div>
+      <div class="founder-bio">Electrical engineer specializing in mini-grid design. Worked with Gham Power. Building pay-as-you-go solar for off-grid communities. Needs finance co-founder.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">Solar</span>
+        <span class="founder-tag">Energy</span>
+        <span class="founder-tag">Hardware</span>
+        <span class="founder-tag">Dharan</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+    <div class="founder-card">
+      <div class="founder-avatar" style="background:#FFF7ED">MP</div>
+      <div class="founder-name">Maya Poudel</div>
+      <div class="founder-role">Agriculture Expert</div>
+      <div class="founder-bio">MSc in Agriculture, worked with FAO Nepal. Deep network with farmers across Chitwan and Nawalpur. Building a price discovery platform. Needs CTO.</div>
+      <div class="founder-tags">
+        <span class="founder-tag">AgriTech</span>
+        <span class="founder-tag">Supply Chain</span>
+        <span class="founder-tag">FAO</span>
+        <span class="founder-tag">Chitwan</span>
+      </div>
+      <button class="founder-connect-btn">Connect →</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Resources & Ecosystem</div>
+  <div class="section-title">Everything you need to start</div>
+  <p class="section-desc">From legal registration to investor intros — 12 essential links to Nepal's startup ecosystem, all in one place.</p>
+
+  <div class="resources-grid reveal">
+    <div class="resource-card">
+      <div class="resource-type">Legal</div>
+      <div class="resource-title">Company Registrar's Office Nepal</div>
+      <div class="resource-desc">Official government portal to register a Private Limited Company in Nepal. Submit documents, pay fees (NPR 5,000–20,000), and track your application status online.</div>
+      <a href="https://www.ocr.gov.np" target="_blank" class="resource-link">ocr.gov.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Legal</div>
+      <div class="resource-title">Inland Revenue Department — PAN/VAT</div>
+      <div class="resource-desc">Register for PAN and VAT after company incorporation. Required for all businesses operating in Nepal. Also handles tax filing, TDS, and compliance.</div>
+      <a href="https://www.ird.gov.np" target="_blank" class="resource-link">ird.gov.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Funding</div>
+      <div class="resource-title">Dolma Impact Fund</div>
+      <div class="resource-desc">Nepal's leading impact-focused private equity fund. Invests in sectors like healthcare, education, and financial inclusion. Check sizes range from $500K to $5M.</div>
+      <a href="https://www.dolmafund.com" target="_blank" class="resource-link">dolmafund.com →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Funding</div>
+      <div class="resource-title">Business Oxygen (BO2)</div>
+      <div class="resource-desc">Nepal's first angel investment network. Connects early-stage startups with local investors. Apply for funding, mentorship, and access to BO2's founder network.</div>
+      <a href="https://www.bo2.com.np" target="_blank" class="resource-link">bo2.com.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Funding</div>
+      <div class="resource-title">ADB Ventures</div>
+      <div class="resource-desc">Asian Development Bank's early-stage investment arm. Funds tech startups solving climate, health, and financial inclusion challenges across Asia, including Nepal.</div>
+      <a href="https://ventures.adb.org" target="_blank" class="resource-link">ventures.adb.org →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Community</div>
+      <div class="resource-title">Bihe.ai — Nepal's Startup Hub</div>
+      <div class="resource-desc">Nepal's most active startup community and incubator. Hosts demo days, networking events, and an incubation program for early-stage founders. Great for co-founder search.</div>
+      <a href="https://www.bihe.ai" target="_blank" class="resource-link">bihe.ai →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Community</div>
+      <div class="resource-title">Antarprerana Nepal</div>
+      <div class="resource-desc">Entrepreneurship fellowship and community for Nepali founders. Runs founder programs, workshops, and connects entrepreneurs with mentors and early investors.</div>
+      <a href="https://www.antarprerana.com.np" target="_blank" class="resource-link">antarprerana.com.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Regulation</div>
+      <div class="resource-title">Nepal Rastra Bank — Fintech & Licensing</div>
+      <div class="resource-desc">Central bank of Nepal. Essential for fintech startups — governs payment systems, mobile banking, e-wallets, and remittance licensing. Regulatory sandbox info available here.</div>
+      <a href="https://www.nrb.org.np" target="_blank" class="resource-link">nrb.org.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Regulation</div>
+      <div class="resource-title">SEBON — Securities Board of Nepal</div>
+      <div class="resource-desc">Regulates securities markets and private equity in Nepal. Important for startups looking to raise structured equity rounds or issue shares to foreign investors under FITTA 2019.</div>
+      <a href="https://www.sebon.gov.np" target="_blank" class="resource-link">sebon.gov.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Research</div>
+      <div class="resource-title">World Bank — Nepal Data & Reports</div>
+      <div class="resource-desc">Free research reports on Nepal's economy, poverty, infrastructure, and sector-level data. Invaluable for building investor pitch decks and validating market sizes.</div>
+      <a href="https://www.worldbank.org/en/country/nepal" target="_blank" class="resource-link">worldbank.org/nepal →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Research</div>
+      <div class="resource-title">Central Bureau of Statistics Nepal</div>
+      <div class="resource-desc">Official government statistics — population, economic surveys, household income data, and sector reports. Primary source for grounding market size claims in Nepal.</div>
+      <a href="https://censusnepal.cbs.gov.np" target="_blank" class="resource-link">cbs.gov.np →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-type">Network</div>
+      <div class="resource-title">Non-Resident Nepali Association</div>
+      <div class="resource-desc">Global network of 4M+ Nepalis abroad. Many are investors, mentors, and advisors actively looking to support Nepal startups. Key channel for diaspora capital and expertise.</div>
+      <a href="https://www.nrna.org" target="_blank" class="resource-link">nrna.org →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Nepal's next unicorn<br>is <em>your</em> idea.</h2>
+  <p>Stop waiting for someone else to build it. The problems are real, the market is ready, and the timing has never been better.</p>
+  <div class="cta-actions">
+    <a href="#problems" class="btn-accent">Find a Problem to Solve</a>
+    <a href="#connect" class="btn-ghost">Find a Co-founder</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Nepal<span>Venture</span></div>
+  <div>Built for Nepal's next generation of builders</div>
+  <nav>
+    <a href="#">About</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+    <a href="#">Submit a Problem</a>
+  </nav>
+</footer>
+
+<script>
+  // PROBLEM DATA
+  const problems = [
+    { sector: 'agri', sectorLabel: 'Agriculture', title: 'Post-harvest loss management for smallholder farmers', desc: 'Farmers lose 25–35% of produce between farm and market due to lack of cold storage and poor logistics. No affordable solution exists at village level.', difficulty: 'hard', market: '$180M', impact: '3.2M farmers', time: '12–18 months to MVP' },
+    { sector: 'agri', sectorLabel: 'Agriculture', title: 'Fair price discovery platform for farm produce', desc: 'Farmers sell at middlemen prices, often 40–60% below market. A real-time price platform accessible via basic phone could transform rural income.', difficulty: 'medium', market: '$90M', impact: '2.8M farmers', time: '4–6 months to MVP' },
+    { sector: 'agri', sectorLabel: 'Agriculture', title: 'Micro crop insurance for subsistence farmers', desc: 'Only 2% of Nepal\'s farmers have insurance. Parametric weather insurance delivered via mobile could protect millions from catastrophic loss.', difficulty: 'hard', market: '$120M', impact: '4.1M farmers', time: '18–24 months' },
+    { sector: 'fintech', sectorLabel: 'Fintech', title: 'Low-cost remittance corridor from Gulf to Nepal', desc: 'Over 1.5M Nepalis in Gulf states send money home at 5–7% fees. Building a blockchain or e-wallet corridor could save $150M+ annually in fees.', difficulty: 'hard', market: '$200M', impact: '1.5M workers', time: '18–24 months' },
+    { sector: 'fintech', sectorLabel: 'Fintech', title: 'Credit scoring for unbanked rural population', desc: '78% of rural Nepalis are effectively credit invisible. Alternative data (mobile usage, remittance history, social graphs) can build viable credit profiles.', difficulty: 'hard', market: '$140M', impact: '8M people', time: '12–18 months' },
+    { sector: 'fintech', sectorLabel: 'Fintech', title: 'Digital merchant payments for bazaar traders', desc: '90% of Nepal\'s retail trade is cash-based. A QR code payment system optimized for low-data environments could unlock $2B+ in formal financial flows.', difficulty: 'medium', market: '$80M', impact: '400K merchants', time: '6–9 months' },
+    { sector: 'health', sectorLabel: 'Healthcare', title: 'Telemedicine platform for rural districts', desc: 'Karnali, Sudurpashchim and hill districts have 1 doctor per 10,000 people. A doctor-on-demand video platform optimized for low bandwidth would save lives.', difficulty: 'medium', market: '$60M', impact: '5M rural patients', time: '6–9 months' },
+    { sector: 'health', sectorLabel: 'Healthcare', title: 'Medicine supply chain and counterfeit detection', desc: '30% of medicines in remote Nepal are counterfeit or expired. A track-and-trace system from manufacturer to patient is critically needed.', difficulty: 'hard', market: '$45M', impact: '8M patients', time: '12–18 months' },
+    { sector: 'edu', sectorLabel: 'Education', title: 'Offline-first learning platform for rural schools', desc: 'Thousands of rural schools have no internet. An offline-capable, locally cached educational app in Nepali could serve 3M+ students outside Kathmandu.', difficulty: 'medium', market: '$50M', impact: '3.5M students', time: '8–12 months' },
+    { sector: 'edu', sectorLabel: 'Education', title: 'Vocational skill certification marketplace', desc: 'Technical skills (plumbing, electrical, construction) are acquired informally with no recognized certification. A digital credential system could 10x earnings for skilled workers.', difficulty: 'easy', market: '$35M', impact: '500K workers', time: '3–5 months' },
+    { sector: 'energy', sectorLabel: 'Energy', title: 'Pay-as-you-go solar for off-grid households', desc: '15% of Nepali households still have no reliable electricity. A PAYG solar model (proven in Africa) would be transformative in hill and mountain districts.', difficulty: 'hard', market: '$90M', impact: '600K households', time: '12–18 months' },
+    { sector: 'energy', sectorLabel: 'Energy', title: 'Smart energy monitoring for NEA grid', desc: 'Nepal Electricity Authority has no real-time consumption monitoring. A smart meter + analytics layer could reduce Nepal\'s 25% transmission losses.', difficulty: 'hard', market: '$70M', impact: '4M consumers', time: '18–24 months' },
+    { sector: 'logistics', sectorLabel: 'Logistics', title: 'Last-mile delivery for hill districts', desc: 'E-commerce doesn\'t reach beyond highway towns. A local courier network using motorbikes, mules, and drone pilots could open 40% of Nepal\'s geography to delivery.', difficulty: 'hard', market: '$80M', impact: '6M people', time: '12–18 months' },
+    { sector: 'tourism', sectorLabel: 'Tourism', title: 'Local experience & homestay booking platform', desc: 'Nepal\'s cultural and adventure experiences are invisible online. A Viator-alternative built specifically for Nepal could keep tourist dollars in local hands.', difficulty: 'easy', market: '$55M', impact: '50K local hosts', time: '3–5 months' },
+    { sector: 'tourism', sectorLabel: 'Tourism', title: 'Trekker safety and emergency alert system', desc: '50+ trekkers die or go missing in Nepal each year. A low-power GPS + satellite alert device + rescue coordination app could be a lifesaver and a liability reducer.', difficulty: 'medium', market: '$30M', impact: '200K trekkers', time: '9–12 months' },
+  ];
+
+  function getDiffClass(d) {
+    if (d === 'easy') return 'diff-easy';
+    if (d === 'medium') return 'diff-medium';
+    return 'diff-hard';
+  }
+
+  function renderProblems(filter) {
+    const list = document.getElementById('problemsList');
+    const filtered = filter === 'all' ? problems : problems.filter(p => p.sector === filter);
+    list.innerHTML = filtered.map(p => `
+      <div class="problem-row">
+        <div class="problem-row-left">
+          <span class="problem-sector-tag">${p.sectorLabel}</span>
+          <div class="problem-title">${p.title}</div>
+          <div class="problem-desc">${p.desc}</div>
+          <div class="problem-meta">
+            <span class="problem-meta-item">Impact: ${p.impact}</span>
+            <span class="problem-meta-item">Timeline: ${p.time}</span>
+          </div>
+        </div>
+        <div class="problem-row-right">
+          <span class="difficulty ${getDiffClass(p.difficulty)}">${p.difficulty}</span>
+          <span class="market-size-badge">${p.market}</span>
+          <span class="market-size-label">market size</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterProblems(sector, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProblems(sector);
+  }
+
+  renderProblems('all');
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+
+  // CONNECT BUTTONS
+  document.querySelectorAll('.founder-connect-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.textContent = '✓ Request Sent';
+      this.style.background = 'var(--ink)';
+      this.style.color = 'var(--bg)';
+    });
+  });
+</script>
+</body>
+</html>
