@@ -283,7 +283,7 @@
   }
   .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 10px; color: var(--bg); }
   .step-desc { font-size: 0.875rem; color: rgba(247,245,240,0.55); line-height: 1.65; }
-  .step-icon { display: none; }
+  .hamburger { display: none; }
 
   /* MARKET OVERVIEW */
   #market { background: var(--bg); }
@@ -438,12 +438,87 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    nav { padding: 0 20px; }
+    /* NAV */
+    nav { padding: 0 20px; height: 56px; }
     .nav-links { display: none; }
-    section, .hero, .cta-section { padding-left: 20px; padding-right: 20px; }
+    .nav-logo { font-size: 1.05rem; }
+
+    /* HAMBURGER MENU */
+    .hamburger {
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 5px; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none; position: fixed; top: 56px; left: 0; right: 0;
+      background: rgba(247,245,240,0.98); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px; z-index: 99;
+      flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.95rem; font-weight: 500; color: var(--ink);
+      text-decoration: none; padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* HERO */
+    .hero { padding: 100px 20px 60px; }
+    .hero h1 { font-size: clamp(36px, 9vw, 52px); }
+    .hero-sub { font-size: 0.95rem; }
+    .hero-actions { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-outline { text-align: center; padding: 14px 24px; font-size: 0.9rem; }
+    .hero-stats { gap: 28px; margin-top: 48px; }
+    .stat-num { font-size: 1.8rem; }
+    .hero-bg-text { font-size: 28vw; }
+
+    /* SECTIONS */
+    section { padding: 64px 20px; }
+    .section-title { font-size: clamp(26px, 7vw, 38px); }
     .divider { margin: 0 20px; }
+
+    /* SECTORS */
+    .sectors-grid { grid-template-columns: 1fr; gap: 2px; }
+
+    /* PROBLEMS */
+    .problems-filter { gap: 8px; }
+    .filter-btn { font-size: 0.75rem; padding: 7px 14px; }
+    .problem-row {
+      grid-template-columns: 1fr;
+      gap: 16px; padding: 20px;
+    }
+    .problem-row-right { text-align: left; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .market-size-badge { font-size: 1rem; }
+
+    /* HOW TO START */
+    .steps-grid { grid-template-columns: 1fr; gap: 20px; }
+
+    /* MARKET */
     .market-grid { grid-template-columns: 1fr; }
-    footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+    .market-card.featured { grid-column: 1; }
+    .market-card-num { font-size: 2.4rem; }
+
+    /* COFOUNDERS */
+    .connect-grid { grid-template-columns: 1fr; }
+
+    /* RESOURCES */
+    .resources-grid { grid-template-columns: 1fr; }
+
+    /* CTA */
+    .cta-section { padding: 64px 20px; }
+    .cta-section h2 { font-size: clamp(28px, 8vw, 44px); }
+    .cta-actions { flex-direction: column; align-items: center; gap: 12px; }
+    .btn-accent, .btn-ghost { text-align: center; padding: 14px 24px; width: 100%; max-width: 320px; }
+
+    /* FOOTER */
+    footer { padding: 32px 20px; flex-direction: column; text-align: center; gap: 12px; }
+    footer nav { justify-content: center; flex-wrap: wrap; gap: 16px; }
   }
 </style>
 </head>
@@ -460,7 +535,18 @@
     <li><a href="#resources">Resources</a></li>
     <li><a href="#connect" class="nav-cta">Join Now</a></li>
   </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sectors" onclick="closeMenu()">Sectors</a>
+  <a href="#problems" onclick="closeMenu()">Problems</a>
+  <a href="#market" onclick="closeMenu()">Market</a>
+  <a href="#connect" onclick="closeMenu()">Co-founders</a>
+  <a href="#resources" onclick="closeMenu()">Resources</a>
+  <a href="#connect" onclick="closeMenu()" style="color:var(--accent);font-weight:700;">Join Now</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -971,6 +1057,23 @@
 </footer>
 
 <script>
+  // HAMBURGER MENU
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  // Close menu on outside click
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
   // PROBLEM DATA
   const problems = [
     { sector: 'agri', sectorLabel: 'Agriculture', title: 'Post-harvest loss management for smallholder farmers', desc: 'Farmers lose 25–35% of produce between farm and market due to lack of cold storage and poor logistics. No affordable solution exists at village level.', difficulty: 'hard', market: '$180M', impact: '3.2M farmers', time: '12–18 months to MVP' },
